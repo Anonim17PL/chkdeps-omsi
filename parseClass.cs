@@ -140,14 +140,14 @@ namespace chkdeps
                     continue;
                 }
 
-                if (ext == ".sco")
-                {
+                //if (ext == ".sco")
+                //{
                     fsx = compareListEx(line, scoFile);
                     if (fsx == null)
                         continue;
                     skiplines = fsx.skiplines;
-                    continue;
-                }
+                    //continue;
+               // }
                 /*
                 if (ext == ".sli")
                 {
