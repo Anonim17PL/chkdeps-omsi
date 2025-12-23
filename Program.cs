@@ -35,6 +35,7 @@ namespace chkdeps
 
             parseClass parseMap = new parseClass();
             Console.WriteLine("Number of tiles: " + listaPlikówMapy.Count.ToString());
+            enumerateChronoMapFiles(sciezka);
             Console.WriteLine("\nAnalyzing map files...");
 
             string sfilepath = "";
@@ -115,6 +116,24 @@ namespace chkdeps
                     skiplines = 2;
                 }
             }
+        }
+        static void enumerateChronoMapFiles(string path)
+        {
+            if (!Directory.Exists(path + "Chrono"))
+                return;
+
+            var chronoMapFiles = Directory.GetFiles(path+"Chrono", "*.map", SearchOption.AllDirectories);
+            bool chronoDetected = false;
+            foreach (string fpath in chronoMapFiles)
+            {
+                chronoDetected = true;
+                string fname = Path.GetFileName(fpath);
+                string frpath = fpath.Substring(path.Length);
+                if (listaPlikówMapy.Contains(fname))
+                    listaPlikówMapy.Add(frpath);
+            }
+            if (chronoDetected)
+                Console.WriteLine("Chrono detected!");
         }
 
         static bool HasNonASCIIChars(string str)
